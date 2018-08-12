@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="E_Shop_Xamarin.Views.LoaderView"
+             BackgroundColor="#C0808080">
+  <ContentView.Content>
+        <StackLayout  VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="Transparent">
+            <ActivityIndicator AbsoluteLayout.LayoutFlags="All" Color="{StaticResource MainColor}"  IsRunning="True"/>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

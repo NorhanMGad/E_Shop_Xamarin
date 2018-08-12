@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="E_Shop_Xamarin.Views.ToolBarView"
+             Title="{Binding UserName}"
+             NavigationPage.HasBackButton="False">
+
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="cart" Order="Primary" Command="{Binding CartCommand}"/>
+        <ToolbarItem Text="Home" Order="Secondary" Command="{Binding HomeCommand}"/>
+        <ToolbarItem Text="Filter" Order="Secondary" Command="{Binding FilterCommand}" />
+        <ToolbarItem Text="Sync" Order="Secondary" Command="{Binding SyncCommand}"/>
+        <ToolbarItem Text="Logout" Order="Secondary" Command="{Binding LogoutCommand}"/>
+    </ContentPage.ToolbarItems>
+    
+</ContentPage>

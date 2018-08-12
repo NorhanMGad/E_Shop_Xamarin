@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="E_Shop_Xamarin.Views.FilterView" BackgroundColor="#C0808080"
+             xmlns:renderers="clr-namespace:E_Shop_Xamarin.Renderers"
+             x:Name="FilterControl">
+    <ContentView.Content>
+        <StackLayout  VerticalOptions="Center" Padding="10,0,10,0" BackgroundColor="Transparent">
+            <StackLayout BackgroundColor="White" Padding="20" Spacing="10">
+                <StackLayout Spacing="10">
+                    <StackLayout Orientation="Horizontal" >
+                        <Label FontAttributes="Bold" Text="Min. Price" HorizontalOptions="Start"/>
+                        <Label FontAttributes="Bold" Text="{Binding Min, StringFormat='$ {0:N0}', Source={x:Reference FilterControl}}" HorizontalOptions="EndAndExpand"/>
+                    </StackLayout>
+                    <renderers:ThumbSlider  ThumbImage="thumb1.png"   x:Name="MinSlider" ValueChanged="MinSlider_ValueChanged" Maximum="10000" Minimum="0"/>
+                </StackLayout>
+                <StackLayout Spacing="10">
+                    <StackLayout Orientation="Horizontal">
+                        <Label FontAttributes="Bold" Text="Max. Price" HorizontalOptions="Start"/>
+                        <Label FontAttributes="Bold" Text="{Binding Max, StringFormat='$ {0:N0}', Source={x:Reference FilterControl}}" HorizontalOptions="EndAndExpand"/>
+                    </StackLayout>
+                    <renderers:ThumbSlider  ThumbImage="thumb1.png"  x:Name="MaxSlider" ValueChanged="MaxSlider_ValueChanged" Maximum="10000" Minimum="0"/>
+                </StackLayout>
+                <Button Text="Apply Filter" Style="{StaticResource GreenButton}" HorizontalOptions="Center" Command="{Binding ApplyCommand, Source={x:Reference FilterControl}}" CommandParameter="{Binding Min}"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<CustomPage:ToolBarView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="E_Shop_Xamarin.Views.HomeView"
+             xmlns:CustomPage="clr-namespace:E_Shop_Xamarin.Views"
+             xmlns:renderers="clr-namespace:E_Shop_Xamarin.Renderers"
+             xmlns:Converters="clr-namespace:E_Shop_Xamarin.Converters">
+
+    <CustomPage:ToolBarView.Resources>
+        <Converters:StringLimitationConverter x:Key="StringLimitationConverter"></Converters:StringLimitationConverter>
+    </CustomPage:ToolBarView.Resources>
+    <ContentPage.Content>
+        <AbsoluteLayout>
+            <ListView  HasUnevenRows="true" ItemsSource="{Binding ItemList}" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" ItemSelected="ListView_ItemSelected"  IsPullToRefreshEnabled="True" RefreshCommand="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <renderers:SelectedViewCell SelectedBackgroundColor="White">
+                            <Grid Padding="10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="2*"/>
+                                </Grid.ColumnDefinitions>
+                                <StackLayout Grid.Column="0" >
+                                    <Image  Source="{Binding BaseImageUrl}" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" WidthRequest="100" HeightRequest="100"/>
+                                </StackLayout>
+                                <StackLayout Grid.Column="1" Spacing="20">
+                                    <Label Text="{Binding Title}" FontSize="Large" FontAttributes="Bold" TextColor="Black"/>
+                                    <Label Text="{Binding Descreption,Converter={StaticResource StringLimitationConverter}}"/>
+                                    <Label Text="{Binding Price, StringFormat='$ {0}'}" FontSize="Large"/>
+                                </StackLayout>
+                            </Grid>
+                        </renderers:SelectedViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <CustomPage:FilterView IsVisible="{Binding FilterVisibilty}" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" ApplyCommand="{Binding ApplyCmd}" Min="{Binding MinValue,Mode=TwoWay}" Max="{Binding MaxValue, Mode=TwoWay}"/>
+            <!--<ActivityIndicator AbsoluteLayout.LayoutBounds="0.5,0.5,0.25,0.25" AbsoluteLayout.LayoutFlags="All" Color="LimeGreen" IsRunning="{Binding IsLoading}" />-->
+            <CustomPage:LoaderView AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" IsVisible="{Binding IsLoading}"/>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</CustomPage:ToolBarView>

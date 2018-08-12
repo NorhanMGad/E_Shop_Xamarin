@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="E_Shop_Xamarin.Views.LoginView"
+             BackgroundColor="{StaticResource MainColor}"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="20">
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
+                <Image Source="cart" HorizontalOptions="Center" VerticalOptions="Center"/>
+                <Label Text="eShop.com" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" TextColor="Black"/>
+            </StackLayout>
+            <Entry Placeholder="Enter username..." Text="{Binding UserName}" BackgroundColor="White" PlaceholderColor="Gray" HorizontalOptions="Center" WidthRequest="300" />
+            <Button Text="Login" Style="{StaticResource YellowButton}" HorizontalOptions="Center" WidthRequest="300" BorderColor="Gray" Command="{Binding LoginCommand}" IsEnabled="{Binding IsEnabled}" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

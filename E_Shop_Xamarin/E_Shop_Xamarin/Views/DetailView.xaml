@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<CustomPage:ToolBarView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="E_Shop_Xamarin.Views.DetailView"
+             xmlns:CustomPage="clr-namespace:E_Shop_Xamarin.Views"
+             NavigationPage.HasBackButton="False"
+              xmlns:Converters="clr-namespace:E_Shop_Xamarin.Converters">
+
+    <CustomPage:ToolBarView.Resources>
+        <Converters:SourceFileConverter x:Key="UrlImageConverter"></Converters:SourceFileConverter>
+    </CustomPage:ToolBarView.Resources>
+    <ContentPage.Content>
+        <StackLayout Padding="10" >
+            <StackLayout Spacing="20">
+                <Label Text="{Binding ItemDetail.Title}" FontSize="Large"/>
+                <Image x:Name="Image" Source="{Binding ImageDetail, Converter={StaticResource UrlImageConverter}}"  HorizontalOptions="CenterAndExpand" WidthRequest="200" HeightRequest="200"/>
+                <Label Text="{Binding ItemDetail.Price, StringFormat='$ {0}'}" FontSize="Large" FontAttributes="Bold"/>
+            </StackLayout>
+            <Label Text="{Binding ItemDetail.Descreption}"/>
+            <StackLayout Orientation="Horizontal" Padding="0,40,0,0">
+                <Stepper Maximum="50" Minimum="1" BackgroundColor="White" x:Name="CartStepper"/>
+                <Label Text="{Binding Source={x:Reference CartStepper},Path=Value}" VerticalOptions="Center" HorizontalOptions="Center" FontSize="Large"/>
+                <Button Style="{StaticResource GreenButton}" Text="Add To Cart" HorizontalOptions="EndAndExpand" Command="{Binding AddToCartCommand}" CommandParameter="{Binding Source={x:Reference CartStepper},Path=Value}"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</CustomPage:ToolBarView>

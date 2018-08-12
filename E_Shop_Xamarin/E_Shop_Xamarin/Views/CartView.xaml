@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<CustomPage:ToolBarView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="E_Shop_Xamarin.Views.CartView"
+             xmlns:CustomPage="clr-namespace:E_Shop_Xamarin.Views"
+             xmlns:renderers="clr-namespace:E_Shop_Xamarin.Renderers"
+             x:Name="MyCartView"
+             xmlns:Converters="clr-namespace:E_Shop_Xamarin.Converters">
+
+    <CustomPage:ToolBarView.Resources>
+        <Converters:StockConverter x:Key="StockConverter"></Converters:StockConverter>
+    </CustomPage:ToolBarView.Resources>
+    <ContentPage.Content>
+        <AbsoluteLayout>
+            <ListView ItemsSource="{Binding ItemList}"  HasUnevenRows="True" SeparatorColor="Gray" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+                <ListView.Header>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Text="Price" Grid.Column="1" FontAttributes="Bold"/>
+                        <Label Text="Quantity" Grid.Column="2" FontAttributes="Bold"/>
+                    </Grid>
+                </ListView.Header>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <renderers:SelectedViewCell SelectedBackgroundColor="White">
+                            <Grid Padding="0,20,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="3*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <StackLayout Orientation="Horizontal" Grid.Column="0" Padding="0,0,5,0" Spacing="10">
+                                    <Image Source="{Binding RelatedItem.BaseImageUrl}" WidthRequest="70" HeightRequest="70" />
+                                    <StackLayout Orientation="Vertical">
+                                        <Label Text="{Binding RelatedItem.Title}"/>
+                                        <Label Text="{Binding StockState}" TextColor="{Binding StockState,Converter={StaticResource StockConverter}}"/>
+                                        <renderers:UnderlineLabel Text="Delete" TextColor="Blue">
+                                            <renderers:UnderlineLabel.GestureRecognizers>
+                                                <TapGestureRecognizer  Command="{Binding BindingContext.DeleteCommand, Source={x:Reference MyCartView}}" CommandParameter="{Binding .}" />
+                                            </renderers:UnderlineLabel.GestureRecognizers>
+                                        </renderers:UnderlineLabel>
+                                    </StackLayout>
+                                </StackLayout>
+                                <Label Text="{Binding RelatedItem.Price, StringFormat='$ {0}'}" Grid.Column="1"/>
+                                <Label Text="{Binding UserQuantity}" Grid.Column="2"/>
+                            </Grid>
+
+                        </renderers:SelectedViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                <ListView.Footer>
+                    <StackLayout Padding="0,5,5,5">
+                        <Button Command="{Binding SubmitCommand}" IsEnabled="{Binding IsEnabled}" Text="Submit" HorizontalOptions="End" WidthRequest="150" Style="{StaticResource GreenButton}"/>
+                    </StackLayout>
+                </ListView.Footer>
+            </ListView>
+            <CustomPage:LoaderView AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" IsVisible="{Binding IsLoading}"/>
+        </AbsoluteLayout>
+
+    </ContentPage.Content>
+</CustomPage:ToolBarView>
